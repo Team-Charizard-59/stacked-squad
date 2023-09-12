@@ -34,7 +34,7 @@ function Signup() {
       </p>
       <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
         <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email" onChange={e => setUsername(e.target.value)}></input>
-        <input className="h-9 pl-2 w-[482px] rounded-lg" type="password" placeholder="Password" onChange={e => setUsername(e.target.value)}></input>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password" onChange={e => setPassword(e.target.value)}></input>
         <button className="w-[482px] rounded-lg" onClick={()=>createAccount()}>Create Account</button>
       </div>
       ------------ OR ------------
