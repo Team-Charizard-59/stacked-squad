@@ -1,5 +1,5 @@
 import express from 'express';
-import userController from '../controllers/userController'
+import lobbyController from '../controllers/lobbyController'
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.post('/login',
   userController.login,
   (req, res) => res.status(200));
 
-export default router;``
+export default router;```

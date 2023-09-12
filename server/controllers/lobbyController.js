@@ -1,3 +1,5 @@
+import db from '../models/ssModels';
+
 // Error creator
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
