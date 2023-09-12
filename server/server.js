@@ -15,6 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.resolve(__dirname, './src')));
 
 // Routes
+import lobbyRouter from './routes/lobbyRouter.js';
+// import * as userRouter from './routes/userRouter.js';
+
+app.use('/lobby', lobbyRouter);
+// app.use('/user', userRouter);
 
 // Default error handler
 app.use((req, res) => {

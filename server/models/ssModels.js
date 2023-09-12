@@ -1,9 +1,13 @@
-import Pool from 'pg';
+import PG from 'pg';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const pool = new Pool({
+// console.log(PG)
+const pool = new PG.Pool({
   connectionString: process.env.PG_URI
 });
 
+console.log(process.env.PG_URI);
 
 export default {
   query: (text, params, callback) => {

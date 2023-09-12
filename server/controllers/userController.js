@@ -8,3 +8,5 @@ const createErr = (errInfo) => {
     message: { err: `Error occurred in userController.${method}. Check server logs for more details.` }
   };
 };
+
+// INSERT INTO users (username, password, email) VALUES ('test1', 'hunter2', 'test1@gmail.com');
