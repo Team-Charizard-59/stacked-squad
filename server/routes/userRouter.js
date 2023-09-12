@@ -1,11 +1,12 @@
 import express from 'express';
 import userController from '../controllers/userController'
+import authController from '../controllers/userController';
 
 const router = express.Router();
 
 router.post('/signup',
-  userController.signup,
-  (req,res) => res.status(201));
+  userController.createUser, authController.createJWT, 
+  (_,res) => res.status(201));
 
 router.post('/login',
   userController.login,
