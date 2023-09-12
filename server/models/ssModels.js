@@ -7,6 +7,8 @@ const pool = new PG.Pool({
   connectionString: process.env.PG_URI
 });
 
+console.log(process.env.PG_URI);
+
 export default {
   query: (text, params, callback) => {
     console.log('executed query', text);
