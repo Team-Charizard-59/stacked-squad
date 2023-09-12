@@ -10,7 +10,7 @@ const [userName, setUserName] = useState('');
 
 const logout = async () => {
     try {
-      const response = await fetch('/logout', {
+      const response = await fetch('/api/user/logout', {
         method: 'POST', // or 'GET' depending on the server implementation
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const logout = async () => {
         window.localStorage.clear()
         setUserName(''); // Clear the username
         setActiveMenuItem(null); // Reset the active menu item
-        window.location.href = 'http://localhost:5173'
+        window.location.href = 'http://localhost:5173/login'
       } else {
         console.log('Error: login out')
       }

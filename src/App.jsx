@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
       <NavBar/>
-      <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
       <header>
         <h2>Stacked Squad</h2>
         <div className='flex mx-4 gap-4'>
@@ -18,6 +17,7 @@ function App() {
           <UserGames/>
         </div>
       </header>
+      <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
     </div>
   );
 }
