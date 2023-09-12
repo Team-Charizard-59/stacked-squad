@@ -1,27 +1,28 @@
 import React from "react";
 import logo from './assets/stackedsquad-logos/ss-full.png'
 import discord from "./assets/discord.png";
+import { Link } from "react-router-dom"
 
 function Signup() {
   return (
-    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline">
-      <img src={logo} className='object-fill w-[500px]'></img>
+    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit">
+      <img src={logo} className='object-none object-[50%] w-[600px] h-[100px]'></img>
       <p className='mt-1'>
-        Already have an account? <a>Sign in.</a>
+        Already have an account? <Link to={'/'}>Sign in.</Link>
       </p>
-      <div className="flex flex-col gap-3 mt-3 mb-3">
-        <input className="h-9 pl-2" placeholder="Username/Email"></input>
-        <input className="h-9 pl-2" placeholder="Password"></input>
-        <button>Sign Up</button>
+      <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email"></input>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password"></input>
+        <button className="w-[482px] rounded-lg">Create Account</button>
       </div>
       ------------ OR ------------
-      <div id='oauth-btns' className='flex flex-col gap-1 mt-2'>
+      <div id='oauth-btns' className='flex flex-col gap-1 mt-2 items-center'>
         <button
           type="button"
-          className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+          className="text-white bg-[#4285F4] px-[10rem] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
         >
           <svg
-            class="mr-2 -ml-1 w-4 h-4"
+            className="mr-2 -ml-1 w-4 h-4"
             aria-hidden="true"
             focusable="false"
             data-prefix="fab"
@@ -39,7 +40,7 @@ function Signup() {
         </button>
         <button
           type="button"
-          className="text-white bg-[#5865F2] hover:bg-[#5865F2]/90 focus:ring-4 focus:ring-[##5865F2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#5865F2]/55 mr-2 mb-2"
+          className="text-white bg-[#5865F2] px-[10rem] hover:bg-[#5865F2]/90 focus:ring-4 focus:ring-[##5865F2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#5865F2]/55 mr-2 mb-2"
         >
           <img src={discord} className="w-[22px] mr-[6px] -ml-2" />
           Sign Up with Discord
