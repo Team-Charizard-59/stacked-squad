@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit">
+    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit items-center">
       <img
         src={logo}
         className="object-none object-[50%] w-[600px] h-[100px]"
@@ -13,7 +13,7 @@ function Login() {
       <p className="mt-1">
         Don't have an account? <Link to={"/signup"}>Create an account.</Link>
       </p>
-      <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
+      <div className="flex flex-col gap-3 mt-3 mb-3">
         <input
           className="h-9 pl-2 w-[482px] rounded-lg"
           placeholder="Username/Email"
@@ -25,7 +25,7 @@ function Login() {
         <button className="w-[482px] rounded-lg">Login</button>
       </div>
       ------------ OR ------------
-      <div id="oauth-btns" className="flex flex-col gap-1 mt-2 items-center">
+      <div id="oauth-btns" className="flex flex-col gap-1 mt-2">
         <button
           type="button"
           className="text-white bg-[#4285F4] px-[10rem] hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
