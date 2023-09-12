@@ -72,3 +72,6 @@ button:focus-visible {
 }
 
 
+.feedContainer {
+ width: 32rem;
+}
