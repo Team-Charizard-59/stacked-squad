@@ -15,12 +15,19 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.resolve(__dirname, './src')));
 
 // Routes
+import userRouter from './routes/userRouter.js'
+import lobbyRouter from './routes/lobbyRouter.js';
+// import * as userRouter from './routes/userRouter.js';
+
+app.use('/lobby', lobbyRouter);
+app.use('/api/user', userRouter);
 
 // Default error handler
 app.use((req, res) => {
   return res.sendStatus(404);
 });
 
+app.use('/user', userRouter);
 // Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {

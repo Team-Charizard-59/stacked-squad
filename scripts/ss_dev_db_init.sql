@@ -4,13 +4,13 @@ CREATE TABLE users (
   user_id serial PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(50),
-  email VARCHAR(100) UNIQUE NOT NULL,
   profile_picture BYTEA
 );
 
 CREATE TABLE lobbies (
   lobby_id serial PRIMARY KEY,
   lobby_name VARCHAR(100) NOT NULL,
+  owner_id serial,
   game_name VARCHAR(50) NOT NULL,
   rank VARCHAR(20),
   game_mode VARCHAR(20),
