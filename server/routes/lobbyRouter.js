@@ -12,15 +12,15 @@ router.get('/',
 
 // // GET /lobby/:lobbyId
 // // Get a lobby from database by lobby ID
-// router.get('/lobby/:lobbyId',
-//   lobbyController.getLobbyByLobbyID,
-//   (req, res) => res.status(200));
+router.get('/:lobbyId',
+  lobbyController.getLobbyByLobbyID,
+  (req, res) => res.status(200).json(res.locals.lobbyData));
 
 // // GET /lobby/:userId
 // // Get all lobbies of user
-// router.get('/lobby/:userId',
-//   lobbyController.getLobbiesOfUser,
-//   (req, res) => res.status(200));
+router.get('/:userId',
+  lobbyController.getLobbiesOfUser,
+  (req, res) => res.status(200).json(res.locals.lobbiesOfUser));
 
 // // Get all lobbies created by user
 // // GET /lobby/createdBy/:userId

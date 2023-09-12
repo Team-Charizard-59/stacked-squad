@@ -28,15 +28,39 @@ lobbyController.getAllLobbies = (req, res, next) => {
 
 // // GET /lobby/:lobbyId
 // // Get a lobby from database by lobby ID
-// lobbyController.getLobbyByLobbyID = (req, res, next) => {
+lobbyController.getLobbyByLobbyID = (req, res, next) => {
+  const { lobbyId } = req.params;
 
-// }
+  db.query(`SELECT * FROM lobbies WHERE lobby_id = ${lobbyId}`)
+    .then((data) => {
+      console.log('Single lobby data: ', data) //TODO: delete when confirmed good
+      res.locals.lobbyData = data.rows[0];
+      next();
+    })
+    .catch((err) => next(createErr({
+      method:'getLobbyByLobbyID',
+      type: 'retrieving (GET) data',
+      err: err
+    })));
+}
 
 // // GET /lobby/:userId
 // // Get all lobbies of user
-// lobbyController.getLobbiesOfUser = (req, res, next) => {
+lobbyController.getLobbiesOfUser = (req, res, next) => {
+  const { userId } = req.params;
 
-// }
+  db.query(`SELECT * FROM lobbies WHERE lobby_id = ${lobbyId}`)
+    .then((data) => {
+      console.log('Got lobbies of user: ', data) //TODO: delete when confirmed good
+      res.locals.lobbiesOfUser = data.rows;
+      next();
+    })
+    .catch((err) => next(createErr({
+      method:'getLobbiesOfUser',
+      type: 'retrieving (GET) data',
+      err: err
+    })));
+}
 
 // // GET /lobby/createdBy/:userId
 // // Get all lobbies created by user
@@ -51,7 +75,7 @@ lobbyController.createLobby = (req, res, next) => {
 
   db.query(`INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, max_players, description, discord_link) VALUES (${lobby_name}, ${game_name}, ${rank}, ${game_mode}, ${max_players}, ${description}, ${discord_link})`)
     .then(() => {
-      console.log('SUCCESS: lobbyController.createLobby created new lobby');
+      console.log('SUCCESS: lobbyController.createLobby created new lobby'); //TODO: delete when confirmed good
       return next();
     })
     .catch((err) => next(createErr({
