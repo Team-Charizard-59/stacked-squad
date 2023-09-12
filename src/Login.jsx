@@ -1,10 +1,11 @@
 import React from "react";
+import logo from './assets/stackedsquad-logos/ss-full.png'
 import discord from "./assets/discord.png";
 
 function Login() {
   return (
-    <div className="flex flex-col rounded-lg bg-slate-800 p-8">
-      <h1>Login</h1>
+    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline">
+      <img src={logo} className='object-fill w-[500px]'></img>
       <p className='mt-1'>
         Don't have an account? <a>Sign up.</a>
       </p>
