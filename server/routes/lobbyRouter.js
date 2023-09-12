@@ -30,28 +30,28 @@ router.get('/:userId',
 
 // POST /lobby/create
 // Create a lobby
-router.get('/create',
-  (lobbyController.createLobby,
-    (req, res) => { res.status(201)})
+router.post('/create',
+  lobbyController.createLobby,
+    (req, res) => {res.sendStatus(201)}
 )
 
 // // PATCH /lobby/edit:lobbyId
 // // Edit a lobby
-// router.get('/lobby/edit:lobbyId',
+// router.patch('/lobby/edit:lobbyId',
 //   (lobbyController.editLobby)
 // )
 
 
 // // PATCH /lobby/join:userId
 // // Add a user to a lobby
-// router.get('/lobby/join:userId',
+// router.patch('/lobby/join:userId',
 //   (lobbyController.joinLobby)
 // )``
 
 
 // // DELETE /lobby/delete:lobbyId
 // // Delete a lobby
-// router.get('/lobby/delete:lobbyId',
+// router.delete('/lobby/delete:lobbyId',
 //   (lobbyController.deleteLobby)
 // )
 

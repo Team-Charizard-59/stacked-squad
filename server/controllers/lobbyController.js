@@ -17,7 +17,7 @@ lobbyController.getAllLobbies = (req, res, next) => {
     .then((data) => {
       console.log('ALL LOBBIES DATA', data) //TODO: delete when confirmed good
       res.locals.allLobbies = data.rows;
-      next();
+      return next();
     })
     .catch((err) => next(createErr({
       method:'getAllLobbies',
@@ -35,7 +35,7 @@ lobbyController.getLobbyByLobbyID = (req, res, next) => {
     .then((data) => {
       console.log('Single lobby data: ', data) //TODO: delete when confirmed good
       res.locals.lobbyData = data.rows[0];
-      next();
+      return next();
     })
     .catch((err) => next(createErr({
       method:'getLobbyByLobbyID',
@@ -53,7 +53,7 @@ lobbyController.getLobbiesOfUser = (req, res, next) => {
     .then((data) => {
       console.log('Got lobbies of user: ', data) //TODO: delete when confirmed good
       res.locals.lobbiesOfUser = data.rows;
-      next();
+      return next();
     })
     .catch((err) => next(createErr({
       method:'getLobbiesOfUser',
@@ -72,10 +72,17 @@ lobbyController.getLobbiesOfUser = (req, res, next) => {
 // Create a lobby
 lobbyController.createLobby = (req, res, next) => {
   const { lobby_name, game_name, rank, game_mode, max_players, description, discord_link } = req.body;
+  // db.query(`INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, max_players, description, discord_link) VALUES ('${lobby_name}, ${game_name}, ${rank}, ${game_mode}, ${max_players}, ${description}, ${discord_link})`)
 
-  db.query(`INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, max_players, description, discord_link) VALUES (${lobby_name}, ${game_name}, ${rank}, ${game_mode}, ${max_players}, ${description}, ${discord_link})`)
-    .then(() => {
-      console.log('SUCCESS: lobbyController.createLobby created new lobby'); //TODO: delete when confirmed good
+  const queryString = `
+  INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, max_players, description, discord_link)
+  VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+
+const values = [lobby_name, game_name, rank, game_mode, max_players, description, discord_link];
+
+db.query(queryString, values)
+  .then(() => {
+      console.log('SUCCESS: lobbyController.createLobby created new lobby');
       return next();
     })
     .catch((err) => next(createErr({
