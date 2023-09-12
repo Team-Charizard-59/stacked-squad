@@ -5,10 +5,10 @@ import { Link } from "react-router-dom"
 
 function Signup() {
   return (
-    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit">
+    <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit items-center">
       <img src={logo} className='object-none object-[50%] w-[600px] h-[100px]'></img>
       <p className='mt-1'>
-        Already have an account? <Link to={'/'}>Sign in.</Link>
+        Already have an account? <Link to={'/login'}>Login.</Link>
       </p>
       <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
         <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email"></input>
