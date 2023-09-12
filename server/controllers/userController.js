@@ -52,6 +52,7 @@ const createErr = (errInfo) => {
       // check the database if username already exists
       db.query(querySelector, username)
       .then(data => {
+        console.log('this be the data!', data)
         // check if username has already been taken
         if (data.rows.length !== 0) return next({
           log: 'Username already taken, please choose a different username',

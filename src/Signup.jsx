@@ -9,7 +9,7 @@ function Signup() {
   const [password, setPassword] = useState('');
 
   const createAccount = () => {
-    fetch('/user/signup', {
+    fetch('/api/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -8,8 +8,8 @@ router.post('/signup',
   userController.createUser,
   (_,res) => res.status(201));
 
-router.post('/login',
-  userController.login,
-  (req, res) => res.status(200));
+// router.post('/login',
+//   userController.login,
+//   (req, res) => res.status(200));
 
 export default router;
