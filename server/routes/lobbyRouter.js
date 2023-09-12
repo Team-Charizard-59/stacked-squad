@@ -7,7 +7,7 @@ const router = express.Router();
 // Get all lobbies from database
 router.get('/lobby/',
   lobbyController.getAllLobbies,
-  (req,res) => res.status(200));
+  (req,res) => res.status(200).json(res.locals.allLobbies));
 
 // GET /lobby/:lobbyId
 // Get a lobby from database by lobby ID
@@ -30,7 +30,8 @@ route.get('/lobby/createdBy/:userId',
 // POST /lobby/create
 // Create a lobby
 route.get('/lobby/create',
-  (lobbyController.createLobby)
+  (lobbyController.createLobby,
+    (req, res) => { res.status(201)})
 )
 
 // PATCH /lobby/edit:lobbyId
