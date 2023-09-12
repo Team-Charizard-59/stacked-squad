@@ -7,7 +7,7 @@ import Login from './Login';
 function App() {
 
   return (
-    <>
+    <div>
       <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
       <header>
         <h2>Stacked Squad</h2>
@@ -16,7 +16,7 @@ function App() {
           <UserGames/>
         </div>
       </header>
-    </>
+    </div>
   );
 }
 
