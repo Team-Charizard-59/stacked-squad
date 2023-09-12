@@ -10,53 +10,49 @@ router.get('/',
   (req, res) => res.status(200).json(res.locals.allLobbies)
 );
 
-// GET /lobby/:lobbyId
-// Get a lobby from database by lobby ID
+// // GET /lobby/:lobbyId
+// // Get a lobby from database by lobby ID
 router.get('/:lobbyId',
   lobbyController.getLobbyByLobbyID,
   (req, res) => res.status(200).json(res.locals.lobbyData));
 
 // // GET /lobby/:userId
-// // Get all lobbies user is participating in
-// router.get('/user/:userId',
-//   lobbyController.getLobbiesOfUser,
-//   (req, res) => res.status(200).json(res.locals.lobbiesOfUser));
+// // Get all lobbies of user
+router.get('/:userId',
+  lobbyController.getLobbiesOfUser,
+  (req, res) => res.status(200).json(res.locals.lobbiesOfUser));
 
-// GET /lobby/createdBy/:userId
-// Get all lobbies CREATED by user
+// // Get all lobbies created by user
+// // GET /lobby/createdBy/:userId
 // router.get('/lobby/createdBy/:userId',
-//   lobbyController.getLobbiesCreatedByUser,
-//   (req, res) => res.status(200).json(res.locals.createdLobbies)
+//   (lobbyController.getLobbiesCreatedByUser)
 // )
 
 // POST /lobby/create
 // Create a lobby
-router.post('/create',
-  lobbyController.createLobby,
-    (req, res) => {res.sendStatus(201)}
+router.get('/create',
+  (lobbyController.createLobby,
+    (req, res) => { res.status(201)})
 )
 
-// PATCH /lobby/edit/:lobbyId
-// Edit a lobby
-// router.patch('/edit/:lobbyId',
-//   lobbyController.editLobby,
-//     (req, res) => {res.status(200).json({})}
+// // PATCH /lobby/edit:lobbyId
+// // Edit a lobby
+// router.get('/lobby/edit:lobbyId',
+//   (lobbyController.editLobby)
 // )
 
 
-// // // PATCH /lobby/join/:userId
-// // // Add a user to a lobby
-// router.patch('/join/:userId',
-//   lobbyController.joinLobby,
-//     (req, res) => {res.status(200).json({})}
-// )
+// // PATCH /lobby/join:userId
+// // Add a user to a lobby
+// router.get('/lobby/join:userId',
+//   (lobbyController.joinLobby)
+// )``
 
 
-// // DELETE /lobby/delete/:lobbyId
+// // DELETE /lobby/delete:lobbyId
 // // Delete a lobby
-// router.delete('/delete/:lobbyId',
-//   lobbyController.deleteLobby,
-//     (req, res) => {res.status(200).json({})}
+// router.get('/lobby/delete:lobbyId',
+//   (lobbyController.deleteLobby)
 // )
 
 export default router;
