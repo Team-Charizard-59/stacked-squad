@@ -11,6 +11,7 @@ CREATE TABLE users (
 CREATE TABLE lobbies (
   lobby_id serial PRIMARY KEY,
   lobby_name VARCHAR(100) NOT NULL,
+  owner_id serial,
   game_name VARCHAR(50) NOT NULL,
   rank VARCHAR(20),
   game_mode VARCHAR(20),
