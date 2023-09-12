@@ -1,5 +1,5 @@
 // User creation and verification
-import db from '../models/ssModels';
+import db from '../models/ssModels.js';
 // Error creator
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
@@ -7,39 +7,39 @@ const createErr = (errInfo) => {
     log: `userController.${method} ${type}: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
     message: { err: `Error occurred in userController.${method}. Check server logs for more details.` }
   };
-
-    const userController = {};
+}
+  const userController = {};
     
-    userController.verifyUser = async (req, res, next) => {
-      const { username, password } = req.body;
-      const querySelector = `SELECT * 
-                             FROM users
-                             WHERE username='${username}'`
-      try {
-        // find user in DB
-        db.query(querySelector)
-        .then(data => {
-          console.log(data)
-          res.locals.user = data.rows;
-        })
+    // userController.verifyUser = async (req, res, next) => {
+    //   const { username, password } = req.body;
+    //   const querySelector = `SELECT * 
+    //                          FROM users
+    //                          WHERE username='${username}'`
+    //   try {
+    //     // find user in DB
+    //     db.query(querySelector)
+    //     .then(data => {
+    //       console.log(data)
+    //       res.locals.user = data.rows;
+    //     })
     
-        // verify that password is valid using bcrypt
-        const match = await bcrypt.compare(password, user.password);
-        return match
-          ? next()
-          : next({
-              log: `Express error handler caught an error at userController.verifyUser: ${err}`,
-              message: {
-                err: 'An error occurred with verifying your credentials.',
-              },
-            });
-      } catch (err) {
-        return next({
-          log: `Express error handler caught an error at userController.verifyUser: ${err}`,
-          message: { err: 'An error occurred with verifying your credentials.' },
-        });
-      }
-    };
+    //     // verify that password is valid using bcrypt
+    //     const match = await bcrypt.compare(password, user.password);
+    //     return match
+    //       ? next()
+    //       : next({
+    //           log: `Express error handler caught an error at userController.verifyUser: ${err}`,
+    //           message: {
+    //             err: 'An error occurred with verifying your credentials.',
+    //           },
+    //         });
+    //   } catch (err) {
+    //     return next({
+    //       log: `Express error handler caught an error at userController.verifyUser: ${err}`,
+    //       message: { err: 'An error occurred with verifying your credentials.' },
+    //     });
+    //   }
+    // };
 
     userController.createUser = (req, res, next) => {
       const querySelector = `SELECT username
@@ -84,6 +84,5 @@ const createErr = (errInfo) => {
     }
 
 
-};
 
-export default authController;
+export default userController;

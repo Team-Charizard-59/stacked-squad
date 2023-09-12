@@ -15,12 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.resolve(__dirname, './src')));
 
 // Routes
-
+import userRouter from './routes/userRouter.js'
 // Default error handler
 app.use((req, res) => {
   return res.sendStatus(404);
 });
 
+app.use('/signup', userRouter);
 // Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
