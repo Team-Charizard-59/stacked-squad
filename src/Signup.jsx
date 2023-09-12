@@ -2,18 +2,40 @@ import React from "react";
 import logo from './assets/stackedsquad-logos/ss-full.png'
 import discord from "./assets/discord.png";
 import { Link } from "react-router-dom"
+import { useState } from 'react'
 
 function Signup() {
-  return (
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const createAccount = () => {
+    fetch('/api/user/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    })
+      .then((data) => {
+        console.log(data)
+          
+      }
+      )
+      .catch((err) => console.error(err));
+  };
+    return (
     <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit items-center">
       <img src={logo} className='object-none object-[50%] w-[600px] h-[100px]'></img>
       <p className='mt-1'>
         Already have an account? <Link to={'/login'}>Login.</Link>
       </p>
       <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
-        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email"></input>
-        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password"></input>
-        <button className="w-[482px] rounded-lg">Create Account</button>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email" onChange={e => setUsername(e.target.value)}></input>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" type="password" placeholder="Password" onChange={e => setUsername(e.target.value)}></input>
+        <button className="w-[482px] rounded-lg" onClick={()=>createAccount()}>Create Account</button>
       </div>
       ------------ OR ------------
       <div id='oauth-btns' className='flex flex-col gap-1 mt-2 items-center'>
