@@ -9,6 +9,7 @@ import { useState } from 'react'
 
 function App() {
   const [update, setUpdate] = useState(true);
+  const [userGames, setUserGames] = useState([]);
   return (
     <>
     <div className='w-screen bg-base-100 h-full'>
@@ -16,9 +17,9 @@ function App() {
       <NavBar />
           {/* <Hero /> */}
       <header className=''>
-        <div id='main-container' className='grid grid-cols-2 mx-7'>
-          <Feed setUpdate={setUpdate} update={update}/>
-          <UserGames setUpdate={setUpdate} update={update}/>
+        <div id='main-container' className='grid grid-cols-2 mx-7 gap-3'>
+          <Feed setUpdate={setUpdate} update={update} userGames={userGames}/>
+          <UserGames setUpdate={setUpdate} update={update} setUserGames={setUserGames} userGames={userGames}/>
         </div>
       </header>
     </div>

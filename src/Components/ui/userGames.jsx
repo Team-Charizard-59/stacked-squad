@@ -1,10 +1,12 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-function UserGames ({ setUpdate, update }){
-  const [displayData, setDisplayData] = useState([]);
+function UserGames ({ setUpdate, update, setUserGames, userGames }){
+  // const [displayData, setDisplayData] = useState([]);
+  const setDisplayData = setUserGames;
+  let displayData = userGames;
   const [currentLobby, setCurrentLobby] = useState({
-    lobby_name: 'test'
+  lobby_name: 'test'
   });
 
   const fetchLobbyData = () => {
@@ -87,18 +89,18 @@ function UserGames ({ setUpdate, update }){
     currentGames.push(
       <div
         key={uniqueKey}
-        className='userActiveLobbies card w-96 bg-neutral text-neutral-content self-center'
+        className='userActiveLobbies card w-96 bg-neutral text-neutral-content self-center mb-6 '
       >
-        <div className='card-body items-center text-center'>
+        <div className='card-body items-center text-center  p-5'>
           <p className="card-title">{lobby_name}</p>
           <p className="text-xs">{game_mode}</p>
               {
               owner_id == Cookies.get('ssid') &&
-              <div className='card-actions flex flex-end w-full'>
-                <button className="btn btn-ghost btn-xs justify-self-end" onClick={() => {handleDelete(lobby_id)}}>Close Lobby</button>{' '}
-                <div className="flex ">
-                  <button className='btn btn-active' onClick={() => {handleEdit(game)}}>Edit</button>
-                  <button className='btn btn-primary'>Start</button>
+              <div className='card-actions flex flex-end w-full justify-between'>
+                <button className="btn btn-ghost btn-xs justify-self-end self-end" onClick={() => {handleDelete(lobby_id)}}>Close Lobby</button>{' '}
+                <div className="flex justify-evenly">
+                  <button className='btn btn-active mx-1 bg-base-100' onClick={() => {handleEdit(game)}}>Edit</button>
+                  <button className='btn btn-primary ml-1'>Start</button>
                 </div>
               </div>
               }
@@ -109,7 +111,7 @@ function UserGames ({ setUpdate, update }){
   return (
     <div className='card bg-primary text-neutral-content'>
       <header className='p-2'>
-        <p className='text-center'>Your Games</p>
+        <p className='text-center text-2xl'>Your Games</p>
       </header>
       {currentGames}
       <dialog id='my_modal_3' className='modal'>
