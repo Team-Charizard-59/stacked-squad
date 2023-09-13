@@ -1,43 +1,36 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-function UserGames (){
+function UserGames() {
   const [displayData, setDisplayData] = useState([]);
 
   const fetchLobbyData = () => {
     fetch(`/api/lobby/user/${Cookies.get('ssid')}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(`fetched data for user ${Cookies.get('ssid')}: `, data);
-          setDisplayData([...data]);
-        })
-        .catch((err) => console.log(`Error getting lobbies ${err}`));
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(`fetched data for user ${Cookies.get('ssid')}: `, data);
+        setDisplayData([...data]);
+      })
+      .catch((err) => console.log(`Error getting lobbies ${err}`));
+  };
 
   useEffect(() => {
     fetchLobbyData();
-  }, [])
+  }, []);
 
-  const handleDelete = () => {
-    
-  }
-  
-  
-  const handleEdit = () => {
+  const handleDelete = () => {};
 
-  }
+  const handleEdit = () => {};
 
-  const handleStart = () => {
-    
-  }
-  const currentGames = []
+  const handleStart = () => {};
+  const currentGames = [];
   displayData.forEach((game) => {
     const { lobby_name, game_name, game_mode } = game;
-    const uniqueKey = `game-${lobby_name}-${game_mode}`
+    const uniqueKey = `game-${lobby_name}-${game_mode}`;
 
-    console.log('owner: ', game.owner_id)
-    console.log('cookie', Cookies.get('ssid'))
-    console.log('bool', game.owner_id == Cookies.get('ssid'))
+    console.log('owner: ', game.owner_id);
+    console.log('cookie', Cookies.get('ssid'));
+    console.log('bool', game.owner_id == Cookies.get('ssid'));
     currentGames.push(
       // <div
       //   key={uniqueKey}
@@ -57,29 +50,32 @@ function UserGames (){
 
       <div
         key={uniqueKey}
-        className='lobbyContainer card w-96 bg-neutral text-neutral-content m-5 '>
+        className='userActiveLobbies card w-96 bg-neutral text-neutral-content self-center'
+      >
         <div className='card-body items-center text-center'>
-          <p className="card-title">{lobby_name}</p>
-          <p className="text-xs">{game_mode}</p>
-            <div className='card-actions flex flex-end w-full'>
-              <button className="btn btn-ghost btn-xs justify-self-end">Close Lobby</button>{' '}
-              <div classNmae="flex ">
-                <button className='btn btn-active'>Edit</button>
-                <button className='btn btn-primary'>Start</button>
-              </div>
+          <p className='card-title'>{lobby_name}</p>
+          <p className='text-xs'>{game_mode}</p>
+          <div className='card-actions flex flex-end w-full'>
+            <button className='btn btn-ghost btn-xs justify-self-end'>
+              Close Lobby
+            </button>{' '}
+            <div classNmae='flex '>
+              <button className='btn btn-active'>Edit</button>
+              <button className='btn btn-primary'>Start</button>
             </div>
+          </div>
         </div>
       </div>
     );
-  })
+  });
   return (
-    <div className="userGamesContainer border-black border-2 pt-2 rounded-xl p-4">
-        <header className="p-2">
-          <p className="text-center">Your Games</p>
-        </header>
-        {currentGames}
+    <div className='card bg-primary text-neutral-content'>
+      <header className='p-2'>
+        <p className='text-center'>Your Games</p>
+      </header>
+      {currentGames}
     </div>
-  )
+  );
 }
 
-export default UserGames
+export default UserGames;

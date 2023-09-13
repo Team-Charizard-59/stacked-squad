@@ -53,6 +53,7 @@ function Feed() {
       //     <button className="btn">Join</button>
       //   </div>
       // </div>
+<div className="">
 
       <div className='indicator ml-6 mb-6'>
         <span className='indicator-item badge badge-primary'>joined</span>{' '}
@@ -76,6 +77,7 @@ function Feed() {
           </div>
         </div>
       </div>
+</div>
     );
   });
 
@@ -114,7 +116,7 @@ function Feed() {
   };
 
   return (
-    <div className='feedContainer w-full border-black border-2 rounded-xl'>
+    <div className='feedContainer card bg-secondary w-full flex-wrap'>
       <div className='flex justify-between m-4'>
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <button
@@ -240,7 +242,7 @@ function Feed() {
           </div>
         </dialog>
       </div>
-      <div>{lobbies}</div>
+      <div className="">{lobbies}</div>
     </div>
   );
 }
