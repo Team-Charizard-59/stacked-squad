@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { createLobby } from "../helperFunctions/createLobby.jsx"
 import Cookies from 'js-cookie';
-function Feed () {
+function Feed ({ setUpdate, update }) {
   // initialize data to the lobbby data in DB
   const [displayData, setDisplayData] = useState([]);
 
@@ -32,7 +32,6 @@ function Feed () {
   const lobbies = [];
   let rooms = 1;
   displayData.forEach ((currentLobbies) => {
-    console.log('this is a lobby: ', currentLobbies)
     const lobbyNumber = rooms++;
     const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players } = currentLobbies;
 
@@ -64,7 +63,7 @@ function Feed () {
   });
 
   const handleJoinLobby = (lobby_id, user_id, curr_players) => {
-    console.log('cookie: ', user_id);
+    console.log('IS THIS RUNNING WHEN WE CREATE A LOBBY???', lobby_id, user_id);
     fetch(`/api/lobby/join/${user_id}`, {
       method: 'PATCH',
       headers: {
@@ -77,6 +76,7 @@ function Feed () {
       })
     })
       .then(() => {
+        setUpdate(!update);
         console.log('Lobby successfully joined');
       })
       .catch((err) => console.log(`Error joining lobby ${err}`));
@@ -84,18 +84,22 @@ function Feed () {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     setLobbyData((prevState) => ({
       ...prevState,
       [name]: value,
       
     }));
-    console.log('data', lobbyData.game)
   };
 
   const handleCreateLobby = () => {
    createLobby(lobbyData)
-   fetchLobbyData();
+   .then(lobId => {
+     handleJoinLobby(lobId, Cookies.get('ssid'), 0)
+     fetchLobbyData();
+   })
+   .catch(err => {
+    console.log(err);
+   })
   }
 
   return (

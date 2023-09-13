@@ -1,14 +1,14 @@
 DROP TABLE IF EXISTS users, lobbies, users_in_lobbies, sessions;
 
 CREATE TABLE sessions (
-user_id varchar(255) UNIQUE 
+user_id varchar(255) UNIQUE,
 cookie_id varchar(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE users (
   user_id serial PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
-  password VARCHAR(50) NOT NULL
+  password VARCHAR(50) NOT NULL,
   profile_picture BYTEA
 );
 

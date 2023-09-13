@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-function UserGames (){
+function UserGames ({ update }){
   const [displayData, setDisplayData] = useState([]);
 
   const fetchLobbyData = () => {
@@ -16,7 +16,7 @@ function UserGames (){
 
   useEffect(() => {
     fetchLobbyData();
-  }, [])
+  }, [update])
 
   const handleDelete = () => {
     
@@ -34,10 +34,6 @@ function UserGames (){
   displayData.forEach((game) => {
     const { lobby_name, game_name, game_mode } = game;
     const uniqueKey = `game-${lobby_name}-${game_mode}`
-
-    console.log('owner: ', game.owner_id)
-    console.log('cookie', Cookies.get('ssid'))
-    console.log('bool', game.owner_id == Cookies.get('ssid'))
     currentGames.push(
       // <div
       //   key={uniqueKey}
@@ -63,7 +59,7 @@ function UserGames (){
           <p className="text-xs">{game_mode}</p>
             <div className='card-actions flex flex-end w-full'>
               <button className="btn btn-ghost btn-xs justify-self-end">Close Lobby</button>{' '}
-              <div classNmae="flex ">
+              <div className="flex ">
                 <button className='btn btn-active'>Edit</button>
                 <button className='btn btn-primary'>Start</button>
               </div>
