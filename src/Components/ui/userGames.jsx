@@ -1,11 +1,43 @@
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 function UserGames (){
-  const data = [{title: 'League', mode: 'Tryhard'}, {title: 'Fortnite', mode: 'For Fun'}]
+  const [displayData, setDisplayData] = useState([]);
+
+  const fetchLobbyData = () => {
+    fetch(`/api/lobby/user/${Cookies.get('ssid')}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(`fetched data for user ${Cookies.get('ssid')}: `, data);
+          setDisplayData([...data]);
+        })
+        .catch((err) => console.log(`Error getting lobbies ${err}`));
+  }
+
+  useEffect(() => {
+    fetchLobbyData();
+  }, [])
+
+  const handleDelete = () => {
+    
+  }
+  
+  
+  const handleEdit = () => {
+
+  }
+
+  const handleStart = () => {
+    
+  }
   const currentGames = []
-  data.forEach((game) => {
-    const title = game.title;
-    const mode = game.mode;
-    const uniqueKey = `game-${title}-${mode}`
+  displayData.forEach((game) => {
+    const { lobby_name, game_name, game_mode } = game;
+    const uniqueKey = `game-${lobby_name}-${game_mode}`
+
+    console.log('owner: ', game.owner_id)
+    console.log('cookie', Cookies.get('ssid'))
+    console.log('bool', game.owner_id == Cookies.get('ssid'))
     currentGames.push(
       // <div
       //   key={uniqueKey}
@@ -27,8 +59,8 @@ function UserGames (){
         key={uniqueKey}
         className='lobbyContainer card w-96 bg-neutral text-neutral-content m-5 '>
         <div className='card-body items-center text-center'>
-          <p className="card-title">{title}</p>
-          <p className="text-xs">{mode}</p>
+          <p className="card-title">{lobby_name}</p>
+          <p className="text-xs">{game_mode}</p>
             <div className='card-actions flex flex-end w-full'>
               <button className="btn btn-ghost btn-xs justify-self-end">Close Lobby</button>{' '}
               <div classNmae="flex ">

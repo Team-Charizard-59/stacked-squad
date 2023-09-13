@@ -20,7 +20,7 @@ import userRouter from './routes/userRouter.js'
 import lobbyRouter from './routes/lobbyRouter.js';
 // import * as userRouter from './routes/userRouter.js';
 
-app.use('/lobby', lobbyRouter);
+app.use('/api/lobby', lobbyRouter);
 app.use('/api/user', userRouter);
 
 // Default error handler
