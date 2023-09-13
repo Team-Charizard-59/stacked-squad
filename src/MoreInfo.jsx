@@ -1,7 +1,7 @@
 import React from 'react'
 
 function MoreInfo({ lobbyInfo }) {
-    const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players, description } = lobbyInfo;
+    const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players, description, discord_link } = lobbyInfo;
   return (
     <dialog id={`moreInfo-${lobby_id}`} className="modal">
 <div className="modal-box pb-10">
@@ -12,6 +12,7 @@ function MoreInfo({ lobbyInfo }) {
   <div><span className='font-extrabold'>Mode:</span> {game_mode}</div>
   <div><span className='font-extrabold'>Max Players: </span>{max_players}</div>
   <div>{description}</div>
+  <div>{discord_link}</div>
 </div>
   </div>
   <div className="modal-action">
