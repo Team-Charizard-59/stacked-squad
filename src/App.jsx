@@ -16,7 +16,7 @@ function App() {
       <NavBar />
           {/* <Hero /> */}
       <header className=''>
-        <div id='main-container' className='grid grid-cols-2 mx-7'>
+        <div id='main-container' className='grid grid-cols-2 mx-7 gap-3'>
           <Feed setUpdate={setUpdate} update={update}/>
           <UserGames setUpdate={setUpdate} update={update}/>
         </div>

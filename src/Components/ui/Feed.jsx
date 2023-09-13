@@ -52,10 +52,10 @@ function Feed ({ setUpdate, update }) {
       //     <button className="btn">Join</button>
       //   </div>
       // </div>
-<div className="">
+<div id="lobby-card">
 
       <div className='indicator ml-6 mb-6'>
-        <span className='indicator-item badge badge-primary'>joined</span>{' '}
+        <span className='indicator-item badge badge-warning'>joined</span>{' '}
         <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
           <div className='card-body items-center text-center'>
             <h2 className='card-title'>{lobby_name}</h2>
@@ -120,7 +120,7 @@ function Feed ({ setUpdate, update }) {
   }
 
   return (
-    <div className='feedContainer card bg-secondary w-full flex-wrap'>
+    <div className='feedContainer card flex bg-secondary '>
       <div className='flex justify-between m-4'>
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <button
