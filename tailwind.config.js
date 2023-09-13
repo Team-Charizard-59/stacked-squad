@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ["forest"]
+  },
 
   plugins: [require('daisyui'), 'prettier-plugin-tailwindcss'],
 };
