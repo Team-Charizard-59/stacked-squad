@@ -32,7 +32,7 @@ function UserGames ({ update }){
   }
   const currentGames = []
   displayData.forEach((game) => {
-    const { lobby_name, game_name, game_mode } = game;
+    const { lobby_name, game_name, game_mode, owner_id } = game;
     const uniqueKey = `game-${lobby_name}-${game_mode}`
     currentGames.push(
       // <div
@@ -59,10 +59,11 @@ function UserGames ({ update }){
           <p className="text-xs">{game_mode}</p>
             <div className='card-actions flex flex-end w-full'>
               <button className="btn btn-ghost btn-xs justify-self-end">Close Lobby</button>{' '}
+              {owner_id == Cookies.get('ssid') && 
               <div className="flex ">
                 <button className='btn btn-active'>Edit</button>
                 <button className='btn btn-primary'>Start</button>
-              </div>
+              </div>}
             </div>
         </div>
       </div>
