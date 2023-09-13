@@ -2,7 +2,6 @@ import Feed from './Components/ui/Feed';
 import './App.css';
 import { Link } from "react-router-dom";
 import UserGames from './Components/ui/userGames'
-import Login from './Login';
 import NavBar from './Navbar';
 
 function App() {
