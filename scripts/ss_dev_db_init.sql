@@ -14,6 +14,7 @@ CREATE TABLE lobbies (
   game_name VARCHAR(50) NOT NULL,
   rank VARCHAR(20),
   game_mode VARCHAR(20),
+  curr_players INT NOT NULL CHECK (curr_players <= max_players),
   max_players INT NOT NULL,
   description VARCHAR(200),
   discord_link VARCHAR(50)
