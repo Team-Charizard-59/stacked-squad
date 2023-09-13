@@ -17,7 +17,7 @@ function Feed ({ setUpdate, update }) {
   
   useEffect(() => {
     fetchLobbyData();
-  }, [])
+  }, [update])
 
   const [lobbyData, setLobbyData] = useState({
     title: '',
