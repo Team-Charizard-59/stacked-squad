@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { createLobby } from '../helperFunctions/createLobby.jsx';
 import Cookies from 'js-cookie';
 import MoreInfo from '../../MoreInfo.jsx';
-function Feed({ setUpdate, update }) {
+function Feed({ setUpdate, update, userGames }) {
   // initialize data to the lobbby data in DB
   const [displayData, setDisplayData] = useState([]);
 
@@ -44,16 +44,15 @@ function Feed({ setUpdate, update }) {
       max_players,
     } = currentLobbies;
 
+    const lobbyIds = userGames.map(game => {
+      return game.lobby_id;
+    })
+
     lobbies.push(
       <div className=''>
         <div className='indicator ml-6 mb-6'>
-          {/* Conditionally render this span! but how?
-              compare the lobby_id to your own games and change button
-
-              if (lobby_id is in the list of lobbies player has then render)&&
-
-          */}
-          <span className='indicator-item badge badge-warning'>joined</span>{' '}
+        {lobbyIds.includes(lobby_id) &&
+        <span className='indicator-item badge badge-warning'>joined</span>}
           <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
             <div className='card-body items-center text-center'>
               <h2 className='card-title'>{lobby_name}</h2>

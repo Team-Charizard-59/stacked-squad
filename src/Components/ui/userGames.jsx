@@ -1,9 +1,10 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-function UserGames ({ setUpdate, update }){
-  const [displayData, setDisplayData] = useState([]);
-
+function UserGames ({ setUpdate, update, setUserGames, userGames }){
+  // const [displayData, setDisplayData] = useState([]);
+  const setDisplayData = setUserGames;
+  let displayData = userGames;
   const fetchLobbyData = () => {
     fetch(`/api/lobby/user/${Cookies.get('ssid')}`)
       .then((res) => res.json())
