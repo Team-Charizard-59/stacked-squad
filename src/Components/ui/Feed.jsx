@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createLobby } from '../helperFunctions/createLobby.jsx';
 import Cookies from 'js-cookie';
+import MoreInfo from '../../MoreInfo.jsx'
 function Feed ({ setUpdate, update }) {
   // initialize data to the lobbby data in DB
   const [displayData, setDisplayData] = useState([]);
@@ -30,6 +31,7 @@ function Feed ({ setUpdate, update }) {
   });
 
   const lobbies = [];
+  const moreInfo = [];
   let rooms = 1;
   displayData.forEach ((currentLobbies) => {
     const lobbyNumber = rooms++;
@@ -43,17 +45,9 @@ function Feed ({ setUpdate, update }) {
     } = currentLobbies;
 
     lobbies.push(
-      // <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
-      // <p>
-      //   {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
-      // </p>
-      //   <div className="flex gap-2">
-      //     <button className="btn">More Info</button>
-      //     <button className="btn">Join</button>
-      //   </div>
-      // </div>
-<div className="">
 
+
+<div className="">
       <div className='indicator ml-6 mb-6'>
         <span className='indicator-item badge badge-primary'>joined</span>{' '}
         <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
@@ -63,7 +57,7 @@ function Feed ({ setUpdate, update }) {
               {game_name} <span className='text-xs'> mode: {game_mode}</span>{' '}
             </p>
             <div className='card-actions justify-end'>
-              <button className='btn btn-ghost'>More Info</button>
+              <button className='btn btn-ghost' onClick={() => document.getElementById(`moreInfo-${lobby_id}`).showModal()}>More Info</button>
               <button
                 className='btn btn-primary'
                 onClick={() =>
@@ -78,6 +72,8 @@ function Feed ({ setUpdate, update }) {
       </div>
 </div>
     );
+
+    moreInfo.push(<MoreInfo lobbyInfo={currentLobbies}/>)
   });
 
   const handleJoinLobby = (lobby_id, user_id, curr_players) => {
@@ -247,6 +243,7 @@ function Feed ({ setUpdate, update }) {
         </dialog>
       </div>
       <div className="">{lobbies}</div>
+      {moreInfo}
     </div>
   );
 }
