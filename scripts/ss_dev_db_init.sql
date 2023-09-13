@@ -1,9 +1,14 @@
-DROP TABLE IF EXISTS users, lobbies, users_in_lobbies;
+DROP TABLE IF EXISTS users, lobbies, users_in_lobbies, sessions;
+
+CREATE TABLE sessions (
+user_id varchar(255) UNIQUE 
+cookie_id varchar(255) UNIQUE NOT NULL
+);
 
 CREATE TABLE users (
   user_id serial PRIMARY KEY,
   username VARCHAR(50) UNIQUE NOT NULL,
-  password VARCHAR(50),
+  password VARCHAR(50) NOT NULL
   profile_picture BYTEA
 );
 
@@ -14,6 +19,7 @@ CREATE TABLE lobbies (
   game_name VARCHAR(50) NOT NULL,
   rank VARCHAR(20),
   game_mode VARCHAR(20),
+  curr_players INT NOT NULL CHECK (curr_players <= max_players),
   max_players INT NOT NULL,
   description VARCHAR(200),
   discord_link VARCHAR(50)
