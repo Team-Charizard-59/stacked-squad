@@ -160,8 +160,6 @@ lobbyController.editLobby = (req, res, next) => {
   WHERE lobby_id = $7
     `, [lobby_name, rank, game_mode, max_players, description, discord_link, lobbyId])
     .then((data) => {
-      // console.log('Got lobbies of user: ', data.rows);
-      // res.locals.lobbiesOfUser = data.rows;
       return next();
     })
     .catch((err) =>
