@@ -37,17 +37,31 @@ function Feed () {
     const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players } = currentLobbies;
 
     lobbies.push(
-      <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
-        <p>
-          {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
-        </p>
-        <div className="flex gap-2">
-          <button className="btn">More Info</button>
-          <button className="btn" onClick={() => handleJoinLobby(lobby_id, Cookies.get('ssid'), curr_players)}>Join</button>
+      // <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
+      // <p>
+      //   {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
+      // </p>
+      //   <div className="flex gap-2">
+      //     <button className="btn">More Info</button>
+      //     <button className="btn">Join</button>
+      //   </div>
+      // </div>
+
+      <div className='lobbyContainer card w-96 bg-neutral text-neutral-content m-5 '>
+        <div className='card-body items-center text-center'>
+          <h2 className='card-title'>{lobby_name}</h2>
+          <p>
+          [ {game_name}{' '}
+            <span className='text-xs'> mode: {game_mode}</span> ]{' '}
+          </p>
+          <div className='card-actions justify-end'>
+            <button className='btn btn-ghost'>More Info</button>
+            <button className='btn btn-primary' onClick={() => handleJoinLobby(lobby_id, Cookies.get('ssid'), curr_players)}>Join</button>
+          </div>
         </div>
       </div>
     );
-  })
+  });
 
   const handleJoinLobby = (lobby_id, user_id, curr_players) => {
     console.log('cookie: ', user_id);
@@ -85,10 +99,13 @@ function Feed () {
   }
 
   return (
-    <div className="feedContainer w-full border-black border-2 rounded-xl">
-      <div className="flex justify-between m-4">
+    <div className='feedContainer w-full border-black border-2 rounded-xl'>
+      <div className='flex justify-between m-4'>
         {/* Open the modal using document.getElementById('ID').showModal() method */}
-        <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>
+        <button
+          className='btn'
+          onClick={() => document.getElementById('my_modal_1').showModal()}
+        >
           Filter
         </button>
         <dialog id="my_modal_1" className="modal">
@@ -108,7 +125,7 @@ function Feed () {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
-                <button className="btn">Close</button>
+                <button className='btn'>Close</button>
               </form>
             </div>
           </div>
@@ -149,11 +166,9 @@ function Feed () {
           </div>
         </dialog>
       </div>
-      <div>
-        {lobbies}
-      </div>
+      <div>{lobbies}</div>
     </div>
   );
 }
 
-export default Feed
+export default Feed;
