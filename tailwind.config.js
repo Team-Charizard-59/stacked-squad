@@ -1,12 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx}"
-],
+  content: [ './src/**/*.{js,jsx}'],
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui"), ('prettier-plugin-tailwindcss')]
-}
 
+  plugins: [require('daisyui'), 'prettier-plugin-tailwindcss'],
+};
