@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { createLobby } from '../helperFunctions/createLobby.jsx';
 import Cookies from 'js-cookie';
-function Feed ({ setUpdate, update }) {
+import MoreInfo from '../../MoreInfo.jsx';
+function Feed({ setUpdate, update }) {
   // initialize data to the lobbby data in DB
   const [displayData, setDisplayData] = useState([]);
 
@@ -17,7 +18,7 @@ function Feed ({ setUpdate, update }) {
 
   useEffect(() => {
     fetchLobbyData();
-  }, [update])
+  }, [update]);
 
   const [lobbyData, setLobbyData] = useState({
     title: '',
@@ -30,8 +31,9 @@ function Feed ({ setUpdate, update }) {
   });
 
   const lobbies = [];
+  const moreInfo = [];
   let rooms = 1;
-  displayData.forEach ((currentLobbies) => {
+  displayData.forEach((currentLobbies) => {
     const lobbyNumber = rooms++;
     const {
       lobby_id,
@@ -43,45 +45,49 @@ function Feed ({ setUpdate, update }) {
     } = currentLobbies;
 
     lobbies.push(
-      // <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
-      // <p>
-      //   {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
-      // </p>
-      //   <div className="flex gap-2">
-      //     <button className="btn">More Info</button>
-      //     <button className="btn">Join</button>
-      //   </div>
-      // </div>
-<div id="lobby-card">
+      <div className=''>
+        <div className='indicator ml-6 mb-6'>
+          {/* Conditionally render this span! but how?
+              compare the lobby_id to your own games and change button
 
-      <div className='indicator ml-6 mb-6'>
-        <span className='indicator-item badge badge-warning'>joined</span>{' '}
-        <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
-          <div className='card-body items-center text-center'>
-            <h2 className='card-title'>{lobby_name}</h2>
-            <p>
-              {game_name} <span className='text-xs'> mode: {game_mode}</span>{' '}
-            </p>
-            <div className='card-actions justify-end'>
-              <button className='btn btn-ghost'>More Info</button>
-              <button
-                className='btn btn-primary'
-                onClick={() =>
-                  handleJoinLobby(lobby_id, Cookies.get('ssid'), curr_players)
-                }
-              >
-                Join
-              </button>
+              if (lobby_id is in the list of lobbies player has then render)&&
+
+          */}
+          <span className='indicator-item badge badge-warning'>joined</span>{' '}
+          <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
+            <div className='card-body items-center text-center'>
+              <h2 className='card-title'>{lobby_name}</h2>
+              <p>
+                {game_name} <span className='text-xs'> mode: {game_mode}</span>{' '}
+              </p>
+              <div className='card-actions justify-end'>
+                <button
+                  className='btn btn-ghost'
+                  onClick={() =>
+                    document.getElementById(`moreInfo-${lobby_id}`).showModal()
+                  }
+                >
+                  More Info
+                </button>
+                <button
+                  className='btn btn-primary'
+                  onClick={() =>
+                    handleJoinLobby(lobby_id, Cookies.get('ssid'), curr_players)
+                  }
+                >
+                  Join
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-</div>
     );
+
+    moreInfo.push(<MoreInfo lobbyInfo={currentLobbies} />);
   });
 
   const handleJoinLobby = (lobby_id, user_id, curr_players) => {
-    console.log('IS THIS RUNNING WHEN WE CREATE A LOBBY???', lobby_id, user_id);
     fetch(`/api/lobby/join/${user_id}`, {
       method: 'PATCH',
       headers: {
@@ -110,14 +116,14 @@ function Feed ({ setUpdate, update }) {
 
   const handleCreateLobby = () => {
     createLobby(lobbyData)
-    .then(lobId => {
-      handleJoinLobby(lobId, Cookies.get('ssid'), 0)
-      fetchLobbyData();
-    })
-    .catch(err => {
-    console.log(err);
-    })
-  }
+      .then((lobId) => {
+        handleJoinLobby(lobId, Cookies.get('ssid'), 0);
+        fetchLobbyData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className='feedContainer card flex bg-secondary '>
@@ -171,9 +177,9 @@ function Feed ({ setUpdate, update }) {
           Create Lobby
         </button>
         <dialog id='my_modal_2' className='modal'>
-          <div className='modal-box'>
-            <h3 className='font-bold text-lg text-center mb-2'>SETUP LOBBY</h3>
-            <div className='flex flex-col justify-center items-center'>
+          <div className='modal-box bg-secondary-focus'>
+            <h3 className='font-bold text-lg text-center mb-2'>Create a New Lobby</h3>
+            <div className='flex flex-col justify-center items-center m-8'>
               <input
                 type='text'
                 placeholder='Title'
@@ -182,9 +188,18 @@ function Feed ({ setUpdate, update }) {
                 onChange={handleInputChange}
                 className='input input-bordered input-sm w-full max-w-xs mb-2 text-gray-700 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 !outline-none'
               />
+{/*
+<div className="dropdown">
+  <label tabIndex={0} className="btn m-1">Select game</label>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-neutral-focus rounded-box w-52">
+    <li><a>League of Legends</a></li>
+    <li><a>Fortnite</a></li>
+  </ul>
+</div> */}
+
               <input
                 type='text'
-                placeholder='Game Here'
+                placeholder='Game Name'
                 name='game'
                 value={lobbyData.game}
                 onChange={handleInputChange}
@@ -220,7 +235,7 @@ function Feed ({ setUpdate, update }) {
               />
               <input
                 type='text'
-                placeholder='Description/More Info'
+                placeholder='Description'
                 name='description'
                 value={lobbyData.description}
                 onChange={handleInputChange}
@@ -238,7 +253,10 @@ function Feed ({ setUpdate, update }) {
             <div className='modal-action'>
               <form method='dialog'>
                 {/* if there is a button in form, it will close the modal */}
-                <button className='btn' onClick={handleCreateLobby}>
+                <button className='btn bg-slate-400 mr-[10px]' onClick={()=>{document.getElementById('my_modal_2').close()}}>
+                  Cancel
+                </button>
+                <button className='btn bg-primary' onClick={handleCreateLobby}>
                   Create
                 </button>
               </form>
@@ -246,7 +264,8 @@ function Feed ({ setUpdate, update }) {
           </div>
         </dialog>
       </div>
-      <div className="">{lobbies}</div>
+      <div className=''>{lobbies}</div>
+      {moreInfo}
     </div>
   );
 }

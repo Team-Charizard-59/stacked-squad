@@ -56,7 +56,7 @@ function UserGames ({ setUpdate, update }){
               <div className='card-actions flex flex-end w-full justify-between'>
                 <button className="btn btn-ghost btn-xs justify-self-end self-end" onClick={() => {handleDelete(lobby_id)}}>Close Lobby</button>{' '}
                 <div className="flex justify-evenly">
-                  <button className='btn btn-active mx-1'>Edit</button>
+                  <button className='btn btn-active mx-1 bg-base-100'>Edit</button>
                   <button className='btn btn-primary ml-1'>Start</button>
                 </div>
               </div>
