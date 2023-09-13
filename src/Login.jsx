@@ -1,9 +1,31 @@
 import React from "react";
 import logo from "./assets/stackedsquad-logos/ss-full.png";
 import discord from "./assets/discord.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react'
 
 function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  
+  const loginAccount = () => {
+    fetch('/api/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    })
+      .then((data) => {
+        navigate('/')  
+      }
+      )
+      .catch((err) => console.error(err));
+  };
   return (
     <div className="flex flex-col rounded-lg bg-slate-800 p-8 inline min-w-fit items-center">
       <img
@@ -16,13 +38,15 @@ function Login() {
       <div className="flex flex-col gap-3 mt-3 mb-3">
         <input
           className="h-9 pl-2 w-[482px] rounded-lg"
-          placeholder="Username/Email"
+          placeholder="Username"
+          onChange={e => setUsername(e.target.value)}
         ></input>
         <input
           className="h-9 pl-2 w-[482px] rounded-lg"
           placeholder="Password"
+          onChange={e => setPassword(e.target.value)}
         ></input>
-        <button className="w-[482px] rounded-lg">Login</button>
+        <button className="w-[482px] rounded-lg" onClick={()=>loginAccount()}>Login</button>
       </div>
       ------------ OR ------------
       <div id="oauth-btns" className="flex flex-col gap-1 mt-2">

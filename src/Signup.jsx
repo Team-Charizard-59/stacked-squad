@@ -3,10 +3,12 @@ import logo from './assets/stackedsquad-logos/ss-full.png'
 import discord from "./assets/discord.png";
 import { Link } from "react-router-dom"
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const createAccount = () => {
     fetch('/api/user/signup', {
@@ -21,7 +23,7 @@ function Signup() {
     })
       .then((data) => {
         console.log(data)
-          
+        navigate('/')  
       }
       )
       .catch((err) => console.error(err));
