@@ -8,7 +8,7 @@ import NavBar from './Navbar';
 function App() {
 
   return (
-    <div className="w-screen">
+    <div className="w-screen bg-base-100 h-screen">
       <NavBar/>
       <header className="w-full">
         <h2>Stacked Squad</h2>
