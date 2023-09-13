@@ -3,12 +3,13 @@ import './App.css';
 import { Link } from "react-router-dom";
 import UserGames from './Components/ui/userGames'
 import Login from './Login';
+import NavBar from './Navbar';
 
 function App() {
 
   return (
     <div>
-      <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
+      <NavBar/>
       <header>
         <h2>Stacked Squad</h2>
         <div className='flex mx-4 gap-4'>
@@ -16,6 +17,7 @@ function App() {
           <UserGames/>
         </div>
       </header>
+      <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
     </div>
   );
 }
