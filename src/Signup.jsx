@@ -3,10 +3,12 @@ import logo from './assets/stackedsquad-logos/ss-full.png'
 import discord from "./assets/discord.png";
 import { Link } from "react-router-dom"
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const createAccount = () => {
     fetch('/api/user/signup', {
@@ -21,7 +23,7 @@ function Signup() {
     })
       .then((data) => {
         console.log(data)
-          
+        navigate('/')  
       }
       )
       .catch((err) => console.error(err));
@@ -34,7 +36,7 @@ function Signup() {
       </p>
       <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
         <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email" onChange={e => setUsername(e.target.value)}></input>
-        <input className="h-9 pl-2 w-[482px] rounded-lg" type="password" placeholder="Password" onChange={e => setUsername(e.target.value)}></input>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password" onChange={e => setPassword(e.target.value)}></input>
         <button className="w-[482px] rounded-lg" onClick={()=>createAccount()}>Create Account</button>
       </div>
       ------------ OR ------------
