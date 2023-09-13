@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie';
 
 export const createLobby = (newData) => {
+  return new Promise((resolve, reject) => {
+
     const newLobby = {...newData}
     console.log('LOGGING NEW LOBBY DATA:', newLobby)
     const body = JSON.stringify({
@@ -14,7 +16,7 @@ export const createLobby = (newData) => {
         discord_link: newLobby.discordLink
     })
     console.log('this is what body is in helper function: ', body);
-    const lobby = fetch('/api/lobby/create', {
+    fetch('/api/lobby/create', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -22,9 +24,13 @@ export const createLobby = (newData) => {
         credentials: 'include',
         body
       })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log("Created lobby:", data)
-        })
-        .catch((err) => console.log(`Error creating lobby ${err}`));
+      .then((res) => res.json())
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        console.log(`Error creating lobby ${err}`);
+        reject(err);
+      });
+    })
 } 
