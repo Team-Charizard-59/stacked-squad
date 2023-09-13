@@ -46,8 +46,8 @@ function Feed ({ setUpdate, update }) {
 
     lobbies.push(
 
-<div className="">
 
+<div className="">
       <div className='indicator ml-6 mb-6'>
         <span className='indicator-item badge badge-primary'>joined</span>{' '}
         <div className='lobbyContainer card w-96 bg-neutral text-neutral-content '>
