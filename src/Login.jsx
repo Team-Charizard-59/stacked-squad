@@ -44,9 +44,10 @@ function Login() {
         <input
           className="h-9 pl-2 w-[482px] rounded-lg"
           placeholder="Password"
+          type='password'
           onChange={e => setPassword(e.target.value)}
         ></input>
-        <button className="w-[482px] rounded-lg" onClick={()=>loginAccount()}>Login</button>
+        <button className="w-[482px] rounded-lg bg-primary h-10" onClick={()=>loginAccount()}>Login</button>
       </div>
       ------------ OR ------------
       <div id="oauth-btns" className="flex flex-col gap-1 mt-2">

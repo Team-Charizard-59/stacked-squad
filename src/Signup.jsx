@@ -35,9 +35,9 @@ function Signup() {
         Already have an account? <Link to={'/login'}>Login.</Link>
       </p>
       <div className="flex flex-col gap-3 mt-3 mb-3 items-center">
-        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username/Email" onChange={e => setUsername(e.target.value)}></input>
-        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password" onChange={e => setPassword(e.target.value)}></input>
-        <button className="w-[482px] rounded-lg" onClick={()=>createAccount()}>Create Account</button>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Username" onChange={e => setUsername(e.target.value)}></input>
+        <input className="h-9 pl-2 w-[482px] rounded-lg" placeholder="Password" type='password' onChange={e => setPassword(e.target.value)}></input>
+        <button className="w-[482px] rounded-lg bg-primary h-10" onClick={()=>createAccount()}>Create Account</button>
       </div>
       ------------ OR ------------
       <div id='oauth-btns' className='flex flex-col gap-1 mt-2 items-center'>
