@@ -17,7 +17,7 @@ function App() {
       <header className=''>
         <div id='main-container' className='flex  gap-4 mx-10'>
           <Feed setUpdate={setUpdate} update={update}/>
-          <UserGames update={update}/>
+          <UserGames setUpdate={setUpdate} update={update}/>
         </div>
       </header>
     </div>

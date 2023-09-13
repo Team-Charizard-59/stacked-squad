@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-function UserGames ({ update }){
+function UserGames ({ setUpdate, update }){
   const [displayData, setDisplayData] = useState([]);
 
   const fetchLobbyData = () => {
@@ -18,8 +18,20 @@ function UserGames ({ update }){
     fetchLobbyData();
   }, [update])
 
-  const handleDelete = () => {
-    
+  const handleDelete = (lobby_id) => {
+    fetch(`/api/lobby/delete/${lobby_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(() => {
+      console.log('Successfully deleted lobby');
+      setUpdate(!update);
+    })
+    .catch((err) => {
+      console.log(`Error deleting lobby ${err}`);
+    });
   }
   
   
@@ -32,7 +44,7 @@ function UserGames ({ update }){
   }
   const currentGames = []
   displayData.forEach((game) => {
-    const { lobby_name, game_name, game_mode, owner_id } = game;
+    const { lobby_name, game_name, game_mode, owner_id, lobby_id } = game;
     const uniqueKey = `game-${lobby_name}-${game_mode}`
     currentGames.push(
       // <div
@@ -57,14 +69,16 @@ function UserGames ({ update }){
         <div className='card-body items-center text-center'>
           <p className="card-title">{lobby_name}</p>
           <p className="text-xs">{game_mode}</p>
-            <div className='card-actions flex flex-end w-full'>
-              <button className="btn btn-ghost btn-xs justify-self-end">Close Lobby</button>{' '}
-              {owner_id == Cookies.get('ssid') && 
-              <div className="flex ">
-                <button className='btn btn-active'>Edit</button>
-                <button className='btn btn-primary'>Start</button>
-              </div>}
-            </div>
+              {
+              owner_id == Cookies.get('ssid') && 
+              <div className='card-actions flex flex-end w-full'>
+                <button className="btn btn-ghost btn-xs justify-self-end" onClick={() => {handleDelete(lobby_id)}}>Close Lobby</button>{' '}
+                <div className="flex ">
+                  <button className='btn btn-active'>Edit</button>
+                  <button className='btn btn-primary'>Start</button>
+                </div>
+              </div>
+              }
         </div>
       </div>
     );
