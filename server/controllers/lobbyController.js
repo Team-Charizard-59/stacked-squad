@@ -1,4 +1,5 @@
 import db from '../models/ssModels.js';
+
 // Error creator
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
@@ -54,7 +55,7 @@ lobbyController.getLobbyByLobbyID = (req, res, next) => {
     );
 };
 
-// // GET /lobby/:userId
+// // GET /lobby/user/:userId
 // // Get all lobbies of user
 lobbyController.getLobbiesOfUser = (req, res, next) => {
   const { userId } = req.params;
@@ -62,6 +63,7 @@ lobbyController.getLobbiesOfUser = (req, res, next) => {
   db.query(`
     SELECT
         lobbies.lobby_id AS lobby_id,
+        owner_id,
         lobby_name,
         game_name,
         rank,
@@ -120,6 +122,7 @@ lobbyController.getLobbiesCreatedByUser = (req, res, next) => {
 // Create a lobby
 lobbyController.createLobby = (req, res, next) => {
   const {
+    owner_id,
     lobby_name,
     game_name,
     rank,
@@ -130,12 +133,15 @@ lobbyController.createLobby = (req, res, next) => {
   } = req.body;
   // db.query(`INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, max_players, description, discord_link) VALUES ('${lobby_name}, ${game_name}, ${rank}, ${game_mode}, ${max_players}, ${description}, ${discord_link})`)
 
+  console.log("Request body in createLobby: ", req.body);
+
   const queryString = `
-  INSERT INTO lobbies (lobby_name, game_name, rank, game_mode, curr_players, max_players, description, discord_link)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+  INSERT INTO lobbies (lobby_name, owner_id, game_name, rank, game_mode, curr_players, max_players, description, discord_link)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
 
   const values = [
     lobby_name,
+    owner_id,
     game_name,
     rank,
     game_mode,

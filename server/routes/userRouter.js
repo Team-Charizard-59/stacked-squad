@@ -1,6 +1,5 @@
 import express from 'express';
 import userController from '../controllers/userController.js';
-import authController from '../controllers/authController.js'
 import sessionController from '../controllers/sessionController.js';
 import cookieController from '../controllers/cookiesController.js';
 

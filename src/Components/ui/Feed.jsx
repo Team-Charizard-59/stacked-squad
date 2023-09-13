@@ -1,14 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createLobby } from "../helperFunctions/createLobby.jsx"
-
+import Cookies from 'js-cookie';
 function Feed () {
-  const data = [
-    {game: 'league', mode: 'tryhard'},
-    {game: 'fortnite', mode: 'for fun'},
-    {game: 'valorant', mode: 'grind'},
-    {game: 'call of duty', mode: 'for fun'},
-    
-  ];
+  // initialize data to the lobbby data in DB
+  const [displayData, setDisplayData] = useState([]);
+
+  const fetchLobbyData = () => {
+    fetch('/api/lobby/')
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('CAN WE SEE THE LOVER DATA IN HERE: ', data);
+          setDisplayData([...data]);
+        })
+        .catch((err) => console.log(`Error getting lobbies ${err}`));
+  }
+  
+  useEffect(() => {
+    fetchLobbyData();
+  }, [])
+
   const [lobbyData, setLobbyData] = useState({
     title: '',
     game: '',
@@ -19,38 +29,59 @@ function Feed () {
     discordLink: '',
   });
 
-  const lobbies =[];
+  const lobbies = [];
   let rooms = 1;
-  data.forEach ((currentLobbies) => {
+  displayData.forEach ((currentLobbies) => {
+    console.log('this is a lobby: ', currentLobbies)
     const lobbyNumber = rooms++;
-    const game = currentLobbies.game;
-    const mode = currentLobbies.mode;
+    const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players } = currentLobbies;
+
     lobbies.push(
       <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
         <p>
-          Lobby {lobbyNumber} [ {game} <span className="text-xs"> mode: {mode}</span> ]{' '}
+          {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
         </p>
         <div className="flex gap-2">
           <button className="btn">More Info</button>
-          <button className="btn">Join</button>
+          <button className="btn" onClick={() => handleJoinLobby(lobby_id, Cookies.get('ssid'), curr_players)}>Join</button>
         </div>
       </div>
     );
   })
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      console.log(name, value)
-      setLobbyData((prevState) => ({
-        ...prevState,
-        [name]: value,
-        
-      }));
-      console.log('data', lobbyData.game)
-    };
+  const handleJoinLobby = (lobby_id, user_id, curr_players) => {
+    console.log('cookie: ', user_id);
+    fetch(`/api/lobby/join/${user_id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        lobbyId: lobby_id,
+        curr_players: curr_players
+      })
+    })
+      .then(() => {
+        console.log('Lobby successfully joined');
+      })
+      .catch((err) => console.log(`Error joining lobby ${err}`));
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value)
+    setLobbyData((prevState) => ({
+      ...prevState,
+      [name]: value,
+      
+    }));
+    console.log('data', lobbyData.game)
+  };
 
   const handleCreateLobby = () => {
    createLobby(lobbyData)
+   fetchLobbyData();
   }
 
   return (

@@ -10,7 +10,6 @@ function App() {
     <div>
       <NavBar/>
       <header>
-        <h2>Stacked Squad</h2>
         <div className='flex mx-4 gap-4'>
           <Feed />
           <UserGames/>

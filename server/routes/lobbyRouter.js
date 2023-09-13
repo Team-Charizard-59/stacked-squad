@@ -16,7 +16,7 @@ router.get('/:lobbyId',
   lobbyController.getLobbyByLobbyID,
   (req, res) => res.status(200).json(res.locals.lobbyData));
 
-// // GET /lobby/:userId
+// // GET /lobby/user/:userId
 // // Get all lobbies user is participating in
 router.get('/user/:userId',
   lobbyController.getLobbiesOfUser,
@@ -33,7 +33,7 @@ router.get('/createdBy/:userId',
 // Create a lobby
 router.post('/create',
   lobbyController.createLobby,
-    (req, res) => {res.sendStatus(201)}
+    (req, res) => res.sendStatus(201)
 )
 
 // PATCH /lobby/edit/:lobbyId
