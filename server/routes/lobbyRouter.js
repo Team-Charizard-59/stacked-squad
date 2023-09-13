@@ -38,10 +38,10 @@ router.post('/create',
 
 // PATCH /lobby/edit/:lobbyId
 // Edit a lobby
-// router.patch('/edit/:lobbyId',
-//   lobbyController.editLobby,
-//     (req, res) => {res.status(200).json({})}
-// )
+router.patch('/edit/:lobbyId',
+  lobbyController.editLobby,
+    (req, res) => {res.status(200).json({})}
+)
 
 
 // // // PATCH /lobby/join/:userId

@@ -147,19 +147,41 @@ lobbyController.createLobby = (req, res, next) => {
     );
 };
 
-// // PATCH /lobby/edit:lobbyId
+// // PATCH /lobby/edit/:lobbyId
 // // Edit a lobby
 lobbyController.editLobby = (req, res, next) => {
+  const { lobbyId } = req.params;
+  console.log(req.body);
+  const { lobby_name, rank, game_mode, max_players, description, discord_link } = req.body;
+
+  db.query(`
+  UPDATE lobbies
+  SET lobby_name = $1, rank = $2, game_mode = $3, max_players = $4, description = $5, discord_link = $6
+  WHERE lobby_id = $7
+    `, [lobby_name, rank, game_mode, max_players, description, discord_link, lobbyId])
+    .then((data) => {
+      // console.log('Got lobbies of user: ', data.rows);
+      // res.locals.lobbiesOfUser = data.rows;
+      return next();
+    })
+    .catch((err) =>
+      next(
+        createErr({
+          method: 'editLobby',
+          type: 'updating (PATCH) data',
+          err: err,
+        })
+      )
+    );
+}
+
+// PATCH /lobby/join/:userId
+// Add a user to a lobby
+lobbyController.joinLobby = (req, res, next) => {
 
 }
 
-// // PATCH /lobby/join:userId
-// // Add a user to a lobby
-// lobbyController.joinLobby = (req, res, next) => {
-
-// }
-
-// // DELETE /lobby/delete:lobbyId
+// // DELETE /lobby/delete/:lobbyId
 // // Delete a lobby
 // lobbyController.deleteLobby = (req, res, next) => {
 
