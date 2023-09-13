@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 function Feed () {
   // initialize data to the lobbby data in DB
   const [displayData, setDisplayData] = useState([]);
+  const [filterGame, setFilterGame] = useState(false)
 
   const fetchLobbyData = () => {
     fetch('/api/lobby/')
@@ -32,21 +33,12 @@ function Feed () {
   const lobbies = [];
   let rooms = 1;
   displayData.forEach ((currentLobbies) => {
+    // if(currentLobbies)
     console.log('this is a lobby: ', currentLobbies)
     const lobbyNumber = rooms++;
     const { lobby_id, lobby_name, game_name, game_mode, curr_players, max_players } = currentLobbies;
-
     lobbies.push(
-      // <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
-      // <p>
-      //   {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
-      // </p>
-      //   <div className="flex gap-2">
-      //     <button className="btn">More Info</button>
-      //     <button className="btn">Join</button>
-      //   </div>
-      // </div>
-
+      
       <div className='lobbyContainer card w-96 bg-neutral text-neutral-content m-5 '>
         <div className='card-body items-center text-center'>
           <h2 className='card-title'>{lobby_name}</h2>
@@ -62,7 +54,7 @@ function Feed () {
       </div>
     );
   });
-
+  
   const handleJoinLobby = (lobby_id, user_id, curr_players) => {
     console.log('cookie: ', user_id);
     fetch(`/api/lobby/join/${user_id}`, {
@@ -76,12 +68,12 @@ function Feed () {
         curr_players: curr_players
       })
     })
-      .then(() => {
-        console.log('Lobby successfully joined');
-      })
-      .catch((err) => console.log(`Error joining lobby ${err}`));
+    .then(() => {
+      console.log('Lobby successfully joined');
+    })
+    .catch((err) => console.log(`Error joining lobby ${err}`));
   }
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value)
@@ -92,12 +84,12 @@ function Feed () {
     }));
     console.log('data', lobbyData.game)
   };
-
+  
   const handleCreateLobby = () => {
-   createLobby(lobbyData)
-   fetchLobbyData();
+    createLobby(lobbyData)
+    fetchLobbyData();
   }
-
+  
   return (
     <div className='feedContainer w-full border-black border-2 rounded-xl'>
       <div className='flex justify-between m-4'>
@@ -105,22 +97,28 @@ function Feed () {
         <button
           className='btn'
           onClick={() => document.getElementById('my_modal_1').showModal()}
-        >
+          >
           Filter
         </button>
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box">
-            <h3 className="font-bold text-lg text-center mb-2">FILTER BY:</h3>
+            <h3 className="font-bold text-lg text-center mb-3">FILTER BY:</h3>
               <div className="flex flex-col justify-center items-center">
-              <button className="btn w-full max-w-xs mb-2 mr-2" id="gameFilter" onClick={() => {}}>
-                GAME
-              </button>
-              <button className="btn w-full max-w-xs mb-2 mr-2" id="attitudeFilter" onClick={() => {}}>
-                GAME ATTITUDE
-              </button>
-              <button className="btn w-full max-w-xs mb-2 mr-2" id="rankFilter" onClick={() => {}}>
-                Rank
-              </button>
+              <details className="dropdown mb-5">
+                <summary className="btn w-full max-w-xs mb-2 mr-2">GAME</summary>
+                  <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <li onClick={() => {}}><a>Fortnite</a></li>
+                    <li onClick={() => {}}><a>League of Legends</a></li>
+                  </ul>
+            </details>
+            <details className="dropdown mb-5">
+                <summary className="btn w-full max-w-xs mb-2 mr-2">GAMING ATTITUDE</summary>
+                  <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <li onClick={() => {}}><a>Try Hard</a></li>
+                    <li onClick={() => {}}><a>Chill</a></li>
+                    <li onClick={() => {}}><a>Competitive</a></li>
+                  </ul>
+            </details>
               </div>
             <div className="modal-action">
               <form method="dialog">
@@ -172,3 +170,13 @@ function Feed () {
 }
 
 export default Feed;
+
+// <div className="lobbyContainer m-2 p-4 border-black border-2 rounded-3xl flex justify-between items-center">
+// <p>
+//   {lobby_name} [ {game_name} <span className="text-xs"> mode: {game_mode}</span> ]{' '}
+// </p>
+//   <div className="flex gap-2">
+//     <button className="btn">More Info</button>
+//     <button className="btn">Join</button>
+//   </div>
+// </div>
