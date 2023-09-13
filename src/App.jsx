@@ -8,9 +8,9 @@ import NavBar from './Navbar';
 function App() {
 
   return (
-    <div>
+    <div className="w-screen">
       <NavBar/>
-      <header>
+      <header className="w-full">
         <h2>Stacked Squad</h2>
         <div className='flex mx-4 gap-4'>
           <Feed />
