@@ -137,7 +137,8 @@ lobbyController.createLobby = (req, res, next) => {
 
   const queryString = `
   INSERT INTO lobbies (lobby_name, owner_id, game_name, rank, game_mode, curr_players, max_players, description, discord_link)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+  RETURNING lobby_id`;
 
   const values = [
     lobby_name,
@@ -152,7 +153,8 @@ lobbyController.createLobby = (req, res, next) => {
   ];
 
   db.query(queryString, values)
-    .then(() => {
+    .then((data) => {
+      res.locals.lobby_id = data.rows[0].lobby_id;
       return next();
     })
     .catch((err) =>

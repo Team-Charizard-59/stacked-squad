@@ -33,8 +33,8 @@ router.get('/createdBy/:userId',
 // Create a lobby
 router.post('/create',
   lobbyController.createLobby,
-    (req, res) => res.sendStatus(201)
-)
+    (req, res) => res.json(res.locals.lobby_id)
+);
 
 // PATCH /lobby/edit/:lobbyId
 // Edit a lobby
