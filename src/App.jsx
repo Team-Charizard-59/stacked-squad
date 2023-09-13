@@ -15,10 +15,10 @@ function App() {
       {/* <Link to={'/login'}>CLICK TO GO TO LOGIN</Link> */}
       <NavBar />
           {/* <Hero /> */}
-      <header >
+      <header className=''>
         <div id='main-container' className='grid grid-cols-2 mx-7'>
-          <Feed setUpdate={setUpdate} update={update} />
-          <UserGames update={update} />
+          <Feed setUpdate={setUpdate} update={update}/>
+          <UserGames setUpdate={setUpdate} update={update}/>
         </div>
       </header>
     </div>
