@@ -10,7 +10,7 @@ import Hero from './Components/ui/Hero.jsx';
 function App() {
   return (
     <div className='w-screen bg-base-100 h-full'>
-      <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
+      {/* <Link to={'/login'}>CLICK TO GO TO LOGIN</Link> */}
       <NavBar />
           {/* <Hero /> */}
       <header className=''>
