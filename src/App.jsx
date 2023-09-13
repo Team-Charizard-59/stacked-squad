@@ -1,20 +1,19 @@
 import Feed from './Components/ui/Feed';
 import './App.css';
-import { Link } from "react-router-dom";
-import UserGames from './Components/ui/userGames'
+import { Link } from 'react-router-dom';
+import UserGames from './Components/ui/userGames';
 import Login from './Login';
 import NavBar from './Navbar';
 
 function App() {
-
   return (
-    <div className="w-screen bg-base-100 h-screen">
-      <NavBar/>
-      <header className="w-full">
+    <div className='w-screen bg-base-100 h-screen'>
+      <NavBar />
+      <header className=''>
         <h2>Stacked Squad</h2>
-        <div className='flex mx-4 gap-4'>
+        <div id='main-container' className='flex  gap-4 mx-10'>
           <Feed />
-          <UserGames/>
+          <UserGames />
         </div>
       </header>
       <Link to={'/login'}>CLICK TO GO TO LOGIN</Link>
@@ -22,4 +21,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
